@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+button {
+  margin-top: 20px;
+}
+
+.status-awaiting_confirmation {
+  color: orange;
+}
+.status-in_preparation {
+  color: blue;
+}
+.status-ready {
+  color: green;
+}
+
