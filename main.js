@@ -9,6 +9,7 @@ createApp({
       restaurantCode: null,
       restaurantCodeInput: null, 
       isLoading: false,
+      cancelNote: '',
     };
   },
   computed: {
@@ -59,6 +60,17 @@ createApp({
     },
     async set_order_ready(code) {
       this.selectedOrder = await this.apiRequest(`orders/${code}/ready`, 'POST');
+      this.fetchOrders()
+    },
+    async cancel_order(code) {
+      if (!this.cancelNote.trim()) {
+        alert('Por favor, insira uma nota de cancelamento.');
+        return;
+      }
+      await this.apiRequest(`orders/${code}/canceled`, 'POST', { note: this.cancelNote });
+      this.selectedOrder = null;
+      this.cancelNote = '';
+      this.fetchOrders();
     },
     updateRestaurantCode() {
       this.restaurantCode = this.restaurantCodeInput.trim();
@@ -74,7 +86,8 @@ createApp({
         in_preparation: 'Em Preparação',
         ready: 'Pronto',
         delivered: 'Entregue',
-        canceled: 'Cancelado'
+        canceled: 'Cancelado',
+        editing: 'Em Edição'
       };
   
       return statusTranslations[status] || 'Status Desconhecido';

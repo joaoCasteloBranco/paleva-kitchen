@@ -81,9 +81,24 @@
             Finalizar Pedido
           </button>
         </div>
-        <button @click="selectedOrder = null" class="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
-          Voltar para os pedidos
-        </button>
+        <div class="grid gap-4 grid-cols-2">
+          <div v-if="selectedOrder.order.status !== 'canceled'">
+            <textarea 
+              v-model="cancelNote"
+              placeholder="Escreva uma nota sobre o cancelamento (obrigatório)" 
+              class="w-full border border-gray-300 rounded p-2 mb-2"
+            ></textarea>
+            <button 
+              @click="cancel_order(selectedOrder.order.order_code)"
+              class="mt-2 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Cancelar Pedido
+            </button>
+            <button @click="selectedOrder = null" class="mt-4  text-red py-2 px-4 rounded hover:text-red-600">
+            Voltar
+          </button>
+        </div>
+        
       </div>
     </div>
   </div>
