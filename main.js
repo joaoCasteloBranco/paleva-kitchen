@@ -56,10 +56,12 @@ createApp({
     },
     async start_preparation(code) {
       this.selectedOrder = await this.apiRequest(`orders/${code}/in_preparation`, 'POST');
+      this.selectedOrder = null;
       this.fetchOrders()
     },
     async set_order_ready(code) {
       this.selectedOrder = await this.apiRequest(`orders/${code}/ready`, 'POST');
+      this.selectedOrder = null;
       this.fetchOrders()
     },
     async cancel_order(code) {
